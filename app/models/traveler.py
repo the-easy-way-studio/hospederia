@@ -1,7 +1,8 @@
-from sqlalchemy import String, Column, CHAR, Integer, DateTime, Date
+from sqlalchemy import String, Column, Integer, Date
 
 from app.database.db import Base, engine
 from datetime import date
+
 
 def create_table():
     Base.metadata.create_all(engine)

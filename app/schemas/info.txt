@@ -1,0 +1,41 @@
+    date_in: date
+    country: str
+    doc_type: str
+    doc_number: str
+    date_expedition: date
+    traveler_name: str
+    traveler_surname: str
+    traveler_second_surname: str
+    gender: str
+    born_date: date
+
+
+@app.post("/traveler")
+async def create_traveler(
+        date_in: date = Form(),
+        country: str = Form(),
+        doc_type: str = Form(),
+        doc_number: str = Form(),
+        date_expedition: date = Form(),
+        traveler_name: str = Form(),
+        traveler_surname: str = Form(),
+        traveler_second_surname: str = Form(),
+        gender: str = Form(),
+        born_date: date = Form(),
+):
+    new_traveler = Traveler(
+        date_in=date_in,
+        country=country,
+        doc_type=doc_type,
+        doc_number=doc_number,
+        date_expedition=date_expedition,
+        traveler_name=traveler_name,
+        traveler_surname=traveler_surname,
+        traveler_second_surname=traveler_second_surname,
+        gender=gender,
+        born_date=born_date
+    )
+    db.add(new_traveler)
+    db.commit()
+    db.refresh(new_traveler)
+    return new_traveler
